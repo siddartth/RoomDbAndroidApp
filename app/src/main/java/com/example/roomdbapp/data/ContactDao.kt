@@ -5,6 +5,7 @@ import androidx.room.Delete
 import androidx.room.Query
 import androidx.room.Upsert
 import com.example.roomdbapp.domain.Contact
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface ContactDao {
@@ -16,11 +17,11 @@ interface ContactDao {
     suspend fun upsertContact(contact: Contact)
 
     @Query("SELECT * FROM contact ORDER BY firstName ASC")
-    fun getOrdersByFirstName(): List<Contact>
+    fun getOrdersByFirstName(): Flow<List<Contact>>
 
     @Query("SELECT * FROM contact ORDER BY lastName ASC")
-    fun getOrdersByLastName(): List<Contact>
+    fun getOrdersByLastName(): Flow<List<Contact>>
 
     @Query("SELECT * FROM contact ORDER BY phoneNumber ASC")
-    fun getOrdersByPhoneNumber(): List<Contact>
+    fun getOrdersByPhoneNumber(): Flow<List<Contact>>
 }
